@@ -1,0 +1,15 @@
+FROM centos:8
+MAINTAINER derek@icanteven.io
+
+RUN dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
+    yum install -y python3 python3-systemd && \
+    yum install -y https://repo.saltstack.com/py3/redhat/salt-py3-repo-latest.el8.noarch.rpm && \
+    yum update -y && \
+    yum install -y virt-what salt-minion && \
+    yum clean all && \
+    rm -rf /var/cache/yum
+
+RUN sed -i "s|#master: salt|master: salt-master|g" /etc/salt/minion
+
+ENTRYPOINT ["salt-minion", "-l", "debug"]
+
