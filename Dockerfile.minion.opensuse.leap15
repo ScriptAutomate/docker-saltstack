@@ -1,4 +1,5 @@
 FROM opensuse/leap:15.1
+
 MAINTAINER derek@icanteven.io
 
 RUN zypper addrepo http://repo.saltstack.com/opensuse/openSUSE_Leap_15.1/systemsmanagement:saltstack:products.repo && \
