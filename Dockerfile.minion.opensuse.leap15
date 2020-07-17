@@ -2,9 +2,9 @@ FROM opensuse/leap:15.1
 
 MAINTAINER derek@icanteven.io
 
-RUN zypper addrepo http://repo.saltstack.com/opensuse/openSUSE_Leap_15.1/systemsmanagement:saltstack:products.repo && \
+RUN zypper addrepo http://download.opensuse.org/repositories/systemsmanagement:/saltstack:/products/openSUSE_Leap_15.1/systemsmanagement:saltstack:products.repo && \
     zypper --gpg-auto-import-keys refresh && \
-    zypper --non-interactive install salt-minion
+    zypper --non-interactive install systemsmanagement_saltstack_products:salt-minion
 
 RUN sed -i "s|#master: salt|master: salt-master|g" /etc/salt/minion
 
