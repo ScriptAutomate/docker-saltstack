@@ -23,6 +23,12 @@ services:
       dockerfile: Dockerfile.minion.ubuntu1804
     depends_on:
       - salt-master
+  salt-minion-ubuntu2004:
+    build:
+      context: .
+      dockerfile: Dockerfile.minion.ubuntu2004
+    depends_on:
+      - salt-master
   salt-minion-opensuse-leap15:
     build:
       context: .

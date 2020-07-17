@@ -1,0 +1,12 @@
+FROM opensuse/tumbleweed:latest
+
+MAINTAINER derek@icanteven.io
+
+RUN zypper addrepo http://repo.saltstack.com/opensuse/openSUSE_Tumbleweed/systemsmanagement:saltstack:products.repo && \
+    zypper --gpg-auto-import-keys refresh && \
+    zypper --non-interactive install salt-minion
+
+RUN sed -i "s|#master: salt|master: salt-master|g" /etc/salt/minion
+
+ENTRYPOINT ["salt-minion", "-l", "debug"]
+

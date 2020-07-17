@@ -1,0 +1,14 @@
+FROM ubuntu:20.04
+MAINTAINER derek@icanteven.io
+
+RUN apt-get update && apt-get install gnupg2 wget -y && \
+    wget -O - https://repo.saltstack.com/py3/ubuntu/20.04/amd64/latest/SALTSTACK-GPG-KEY.pub | apt-key add - && \
+    echo 'deb http://repo.saltstack.com/py3/ubuntu/20.04/amd64/latest focal main' >> /etc/apt/sources.list.d/saltstack.list && \
+    apt-get update && \
+    apt-get install salt-minion -y && \
+    apt-get autoclean
+
+RUN sed -i "s|#master: salt|master: salt-master|g" /etc/salt/minion
+
+ENTRYPOINT ["salt-minion", "-l", "debug"]
+
