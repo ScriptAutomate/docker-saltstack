@@ -29,6 +29,18 @@ services:
       dockerfile: Dockerfile.minion.ubuntu2004
     depends_on:
       - salt-master
+  salt-minion-debian-buster:
+    build:
+      context: .
+      dockerfile: Dockerfile.minion.debian.buster
+    depends_on:
+      - salt-master
+  salt-minion-debian-stretch:
+    build:
+      context: .
+      dockerfile: Dockerfile.minion.debian.stretch
+    depends_on:
+      - salt-master
   salt-minion-opensuse-leap15:
     build:
       context: .
